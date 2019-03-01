@@ -19,13 +19,13 @@ FROM golang:1.10-stretch as builder
 
 # install prereqs
 ENV PROTOC_VERSION 3.6.1
-ENV PROTOC_SHA256SUM 6003de742ea3fcf703cfec1cd4a3380fd143081a2eb0e559065563496af27807
+ENV PROTOC_SHA256SUM af8e5aaaf39ddec62ec8dd2be1b8d9602c6da66564883a16393ade5f71170922
 
 RUN apt-get update \
  && apt-get install -y unzip libpcap-dev \
- && curl -L -o /tmp/protoc-${PROTOC_VERSION}-linux-x86_64.zip https://github.com/google/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-x86_64.zip \
- && echo "$PROTOC_SHA256SUM  /tmp/protoc-${PROTOC_VERSION}-linux-x86_64.zip" | sha256sum -c - \
- && unzip /tmp/protoc-${PROTOC_VERSION}-linux-x86_64.zip -d /tmp/protoc3 \
+ && curl -L -o /tmp/protoc-${PROTOC_VERSION}-linux-aarch_64.zip https://github.com/google/protobuf/releases/download/v${PROTOC_VERSION}/protoc-${PROTOC_VERSION}-linux-aarch_64.zip \
+ && echo "$PROTOC_SHA256SUM  /tmp/protoc-${PROTOC_VERSION}-linux-aarch_64.zip" | sha256sum -c - \
+ && unzip /tmp/protoc-${PROTOC_VERSION}-linux-aarch_64.zip -d /tmp/protoc3 \
  && mv /tmp/protoc3/bin/* /usr/local/bin/ \
  && mv /tmp/protoc3/include/* /usr/local/include/ \
  && go get -v github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway \
